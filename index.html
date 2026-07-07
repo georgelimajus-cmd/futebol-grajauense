@@ -21,10 +21,14 @@
     .consent{display:flex;gap:10px;align-items:flex-start;margin:18px 0;padding:13px;background:#f7faf8;border-radius:12px;border:1px solid var(--line);font-size:13px;line-height:1.45;color:#50685d}.consent input{width:18px;height:18px;margin-top:1px;flex:0 0 auto}
     .message{display:none;margin:16px 0;padding:14px;border-radius:12px;line-height:1.45}.message.ok{display:block;background:#e9f8ef;color:#126b3b;border:1px solid #bde7cc}.message.err{display:block;background:#fff0ee;color:#9e241b;border:1px solid #ffd2cc}.footer{text-align:center;color:#698075;font-size:12px;padding:18px}.hint{font-size:12px;color:#70867b;margin-top:2px}
     @media(max-width:700px){.grid{grid-template-columns:1fr}.athlete{grid-template-columns:1fr}.remove{width:100%}form{padding:16px}.section{padding:16px}.hero{padding-top:32px}}
+  
+    .semel-brand{display:flex;justify-content:center;align-items:center;margin:0 0 18px}
+    .semel-logo{display:block;width:clamp(105px,14vw,155px);height:auto;max-height:170px;object-fit:contain;filter:drop-shadow(0 8px 18px rgba(0,0,0,.18))}
+
   </style>
 </head>
 <body>
-  <header class="hero"><div class="hero-inner"><span class="kicker">Campeonato Municipal 2026</span><h1>Inscrição – 1ª Divisão do Futebol Grajauense</h1><p>Preencha os dados da equipe e cadastre até 25 atletas com nome completo e CPF.</p><div class="deadline">📅 Inscrições para a 1ª Divisão até o dia 31 de julho de 2026.</div></div></header>
+  <header class="hero"><div class="hero-inner"><div class="semel-brand"><img class="semel-logo" src="logo-semel.png" alt="Logo da SEMEL"></div><span class="kicker">Campeonato Municipal 2026</span><h1>Inscrição – 1ª Divisão do Futebol Grajauense</h1><p>Preencha os dados da equipe e cadastre até 25 atletas com nome completo e CPF.</p><div class="deadline">📅 Inscrições para a 1ª Divisão até o dia 31 de julho de 2026.</div></div></header>
   <main><div class="card"><form id="registrationForm" novalidate>
     <section class="section"><h2>Dados da equipe</h2><p class="section-note">Informe os dados do time e do responsável pela inscrição.</p><div class="grid">
       <div class="field"><label for="team">Nome do time *</label><input id="team" required autocomplete="organization" placeholder="Nome oficial da equipe"></div>
