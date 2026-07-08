@@ -67,7 +67,7 @@
   <div class="screen-actions"><button class="print" onclick="window.print()">Imprimir pedido</button><button class="close" onclick="window.close()">Fechar</button></div>
   <main class="receipt">
     <header class="header">
-      <h1>${escapeHtml(business.businessName || 'Forno & Gestão')}</h1>
+      <h1>${escapeHtml(business.businessName || 'Bistrô Pizzaria - Gestão Admininstrativa')}</h1>
       ${business.phone ? `<p>${escapeHtml(business.phone)}</p>` : ''}
       ${business.address ? `<p>${escapeHtml(business.address)}</p>` : ''}
     </header>
@@ -101,7 +101,7 @@
       <div class="total-line grand-total"><span>TOTAL</span><span>${money.format(total)}</span></div>
     </section>
 
-    <footer class="footer">Comanda gerada pelo sistema Forno & Gestão</footer>
+    <footer class="footer">Comanda gerada pelo sistema Bistrô Pizzaria - Gestão Admininstrativa</footer>
   </main>
 </body>
 </html>`);
