@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#b91c1c" />
+  <title>Forno & Gestão | Administração da Pizzaria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">🍕</div>
+        <div>
+          <strong>Forno & Gestão</strong>
+          <span>Pizzaria</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-item" data-view="orders"><span>🧾</span> Pedidos</button>
+        <button class="nav-item" data-view="products"><span>🍕</span> Cardápio</button>
+        <button class="nav-item" data-view="customers"><span>👥</span> Clientes</button>
+        <button class="nav-item" data-view="inventory"><span>📦</span> Estoque</button>
+        <button class="nav-item" data-view="cash"><span>💰</span> Caixa</button>
+        <button class="nav-item" data-view="settings"><span>⚙️</span> Configurações</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-avatar">GL</div>
+        <div><strong>Administrador</strong><span>Gestão local</span></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-only" id="menuToggle" aria-label="Abrir menu">☰</button>
+          <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <p id="pageSubtitle">Visão geral da sua pizzaria</p>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="status-pill"><span class="status-dot"></span> Operação aberta</div>
+          <button class="primary-button" data-action="new-order">+ Novo pedido</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-dashboard">
+        <div class="kpi-grid" id="kpiGrid"></div>
+
+        <div class="dashboard-grid">
+          <article class="panel panel-span-2">
+            <div class="panel-header">
+              <div><h2>Vendas dos últimos 7 dias</h2><p>Faturamento diário</p></div>
+              <span class="badge">7 dias</span>
+            </div>
+            <div class="chart" id="salesChart"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header"><div><h2>Pedidos por status</h2><p>Operação de hoje</p></div></div>
+            <div class="status-summary" id="statusSummary"></div>
+          </article>
+
+          <article class="panel panel-span-2">
+            <div class="panel-header">
+              <div><h2>Pedidos recentes</h2><p>Últimas movimentações</p></div>
+              <button class="text-button" data-view-target="orders">Ver todos</button>
+            </div>
+            <div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Cliente</th><th>Tipo</th><th>Total</th><th>Status</th></tr></thead><tbody id="recentOrdersBody"></tbody></table></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header"><div><h2>Estoque crítico</h2><p>Itens que precisam de atenção</p></div></div>
+            <div class="alert-list" id="lowStockList"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-orders">
+        <div class="section-toolbar">
+          <div class="search-box"><span>⌕</span><input id="orderSearch" placeholder="Buscar pedido ou cliente" /></div>
+          <div class="toolbar-actions">
+            <select id="orderStatusFilter" class="select"><option value="all">Todos os status</option><option>Novo</option><option>Em preparo</option><option>Pronto</option><option>Saiu para entrega</option><option>Concluído</option><option>Cancelado</option></select>
+            <button class="primary-button" data-action="new-order">+ Novo pedido</button>
+          </div>
+        </div>
+        <article class="panel">
+          <div class="table-wrap"><table><thead><tr><th>Pedido</th><th>Data/Hora</th><th>Cliente</th><th>Itens</th><th>Tipo</th><th>Total</th><th>Pagamento</th><th>Status</th><th></th></tr></thead><tbody id="ordersBody"></tbody></table></div>
+        </article>
+      </section>
+
+      <section class="view" id="view-products">
+        <div class="section-toolbar">
+          <div class="search-box"><span>⌕</span><input id="productSearch" placeholder="Buscar no cardápio" /></div>
+          <button class="primary-button" data-action="new-product">+ Novo produto</button>
+        </div>
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+
+      <section class="view" id="view-customers">
+        <div class="section-toolbar">
+          <div class="search-box"><span>⌕</span><input id="customerSearch" placeholder="Buscar cliente" /></div>
+          <button class="primary-button" data-action="new-customer">+ Novo cliente</button>
+        </div>
+        <article class="panel"><div class="table-wrap"><table><thead><tr><th>Cliente</th><th>Telefone</th><th>Endereço</th><th>Pedidos</th><th>Total gasto</th><th></th></tr></thead><tbody id="customersBody"></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="view-inventory">
+        <div class="section-toolbar">
+          <div><h2 class="section-title">Controle de insumos</h2><p class="section-copy">Acompanhe quantidades e pontos de reposição.</p></div>
+          <button class="primary-button" data-action="new-stock">+ Novo insumo</button>
+        </div>
+        <article class="panel"><div class="table-wrap"><table><thead><tr><th>Insumo</th><th>Categoria</th><th>Quantidade</th><th>Mínimo</th><th>Custo unit.</th><th>Status</th><th></th></tr></thead><tbody id="inventoryBody"></tbody></table></div></article>
+      </section>
+
+      <section class="view" id="view-cash">
+        <div class="kpi-grid cash-kpis" id="cashKpis"></div>
+        <div class="dashboard-grid">
+          <article class="panel panel-span-2">
+            <div class="panel-header"><div><h2>Movimentações do caixa</h2><p>Entradas e saídas registradas</p></div><button class="primary-button small" data-action="new-transaction">+ Lançamento</button></div>
+            <div class="table-wrap"><table><thead><tr><th>Data/Hora</th><th>Descrição</th><th>Categoria</th><th>Tipo</th><th>Valor</th><th></th></tr></thead><tbody id="cashBody"></tbody></table></div>
+          </article>
+          <article class="panel">
+            <div class="panel-header"><div><h2>Formas de pagamento</h2><p>Pedidos concluídos</p></div></div>
+            <div class="payment-breakdown" id="paymentBreakdown"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <div class="settings-grid">
+          <article class="panel">
+            <div class="panel-header"><div><h2>Dados da pizzaria</h2><p>Informações exibidas no sistema</p></div></div>
+            <form id="settingsForm" class="form-grid">
+              <label class="field full"><span>Nome da pizzaria</span><input name="businessName" required /></label>
+              <label class="field"><span>Telefone</span><input name="phone" /></label>
+              <label class="field"><span>Taxa de entrega padrão</span><input name="deliveryFee" type="number" min="0" step="0.01" /></label>
+              <label class="field full"><span>Endereço</span><input name="address" /></label>
+              <div class="form-actions full"><button type="submit" class="primary-button">Salvar configurações</button></div>
+            </form>
+          </article>
+          <article class="panel danger-panel">
+            <div class="panel-header"><div><h2>Dados locais</h2><p>Este MVP salva os dados no navegador.</p></div></div>
+            <p class="muted">Use exportação para criar um backup. A restauração substitui os dados atuais.</p>
+            <div class="stack-actions"><button class="secondary-button" id="exportData">Exportar backup JSON</button><label class="secondary-button file-button">Importar backup<input id="importData" type="file" accept="application/json" hidden /></label><button class="danger-button" id="resetData">Restaurar dados de demonstração</button></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header"><div><h2 id="modalTitle"></h2><p id="modalSubtitle"></p></div><button class="icon-button" id="closeModal" aria-label="Fechar">✕</button></div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
